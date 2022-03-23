@@ -10,15 +10,15 @@ class App {
     {
         $url = $this->parseURL();
         
-        
         // Controller
         if($url == NULL)
         {
         $url = [$this->controller];
         }
-        if( file_exists('../app/controllers' . $url[0] . 'php') ) {
-            $this->controller = $url[0];
-            unset($url[0]);
+        if( file_exists('../app/controllers' . $url[0] . '.php') ) {
+              $this->controller = $url[0];
+              unset($url[0]);
+             var_dump($url);
         }
 
         require_once '../app/controllers/' . $this->controller . '.php';
@@ -33,9 +33,12 @@ class App {
         }
 
         // Params
-        if ( !empty($url)) {
-            var_dump($url);
+        if ( !empty($url) ) {
+            $this->params = array_values($url);
         }
+
+        // Jalankan cotroller & methord, kirimkan parrams jika ada
+        call_user_func_array([$this->controller, $this->method], $this->params);
     }
 
     // Untuk parsing URL

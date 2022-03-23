@@ -1,7 +1,11 @@
 <?php 
 
 class About {
+    public function index() {
+        echo 'About';
+    }
+
     public function page() {
-        echo 'controller about method page';
+        echo 'About/page';
     }
 }
